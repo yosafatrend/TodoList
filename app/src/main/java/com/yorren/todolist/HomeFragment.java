@@ -1,5 +1,6 @@
 package com.yorren.todolist;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,12 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
     List<ToDo> list = new ArrayList<ToDo>();
-    TodoAdapter toDoAdapter;
+    TaskAdapter taskAdapter;
     DatabaseHelper myDb;
     RecyclerView rvList;
 
@@ -34,15 +37,14 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
         rvList = view.findViewById(R.id.rvList);
         myDb = new DatabaseHelper(getActivity());
-        toDoAdapter = new TodoAdapter(getActivity(), list);
+        taskAdapter = new TaskAdapter(getActivity(), list);
 
-        list.addAll(myDb.getAllData());
-        toDoAdapter.notifyDataSetChanged();
-        rvList.setLayoutManager(new LinearLayoutManager(getActivity()   ));
-        rvList.setAdapter(toDoAdapter);
+        list.addAll(myDb.getDataUnchecked());
+        taskAdapter.notifyDataSetChanged();
+        rvList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvList.setAdapter(taskAdapter);
 
         return view;
     }

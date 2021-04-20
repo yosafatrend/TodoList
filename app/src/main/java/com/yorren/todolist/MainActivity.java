@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private boolean getFragmentPage(Fragment fragment){
+    public boolean getFragmentPage(Fragment fragment){
         if (fragment != null){
             getSupportFragmentManager()
                     .beginTransaction()
@@ -54,4 +56,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
 }
