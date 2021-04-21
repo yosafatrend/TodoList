@@ -33,6 +33,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
             <Button
+                android:id="@+id/btnSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="7"
@@ -41,9 +42,11 @@
                 android:backgroundTint="@color/blue"
                 android:drawableTint="@color/white"/>
             <EditText
+                android:id="@+id/edtSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:hint="Cari kegiatan..."/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

@@ -10,6 +10,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +32,7 @@ public class AddFragment extends Fragment {
     RecyclerView rvList;
     FloatingActionButton fabAdd;
     Dialog popup;
+    EditText edtSearch;
 
     public AddFragment() {
         // Required empty public constructor
@@ -50,11 +53,39 @@ public class AddFragment extends Fragment {
         rvList = v.findViewById(R.id.rvList);
         myDb = new DatabaseHelper(getActivity());
         toDoAdapter = new TodoAdapter(getActivity(), list);
+        edtSearch = v.findViewById(R.id.edtSearch);
 
         list.addAll(myDb.getAllData());
         toDoAdapter.notifyDataSetChanged();
         rvList.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvList.setAdapter(toDoAdapter);
+
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (edtSearch.length() != 0){
+                    List<ToDo> todoSearch = myDb.search(edtSearch.getText().toString().trim());
+                    if (todoSearch != null) {
+                        rvList.setAdapter(new TodoAdapter(getActivity(), todoSearch));
+                    }
+                }else{
+                    List<ToDo> todoSearch = myDb.getAllData();
+                    if (todoSearch != null) {
+                        rvList.setAdapter(new TodoAdapter(getActivity(), todoSearch));
+                    }
+                }
+            }
+        });
 
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override

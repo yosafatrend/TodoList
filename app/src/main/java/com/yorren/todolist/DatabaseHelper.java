@@ -89,6 +89,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return todos;
     }
 
+    public List<ToDo> search(String keyword) {
+        List<ToDo> todos = new ArrayList<>();
+        String selectQuery = "SELECT * FROM TODO_TABLE WHERE NAMA LIKE ?";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{"%" + keyword + "%"});
+        if (cursor.moveToFirst()) {
+            do {
+                ToDo todo = new ToDo();
+                todo.setId(cursor.getString(0));
+                todo.setNama(cursor.getString(1));
+                todo.setStatus(cursor.getString(2));
+                todos.add(todo);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return todos;
+    }
+
+    public List<ToDo> searchChecked(String keyword) {
+        List<ToDo> todos = new ArrayList<>();
+        String selectQuery = "SELECT * FROM TODO_TABLE WHERE STATUS = '0' AND NAMA LIKE ?";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{"%" + keyword + "%"});
+        if (cursor.moveToFirst()) {
+            do {
+                ToDo todo = new ToDo();
+                todo.setId(cursor.getString(0));
+                todo.setNama(cursor.getString(1));
+                todo.setStatus(cursor.getString(2));
+                todos.add(todo);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return todos;
+    }
+
 
 
     //metode untuk menambah data
