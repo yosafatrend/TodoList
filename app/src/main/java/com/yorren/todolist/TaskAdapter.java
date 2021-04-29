@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> {
+    //SAMA SEPERTI YANG ADA DI TODOADAPTER
     Context context;
     List<ToDo> todo;
     DatabaseHelper myDb;

@@ -1,7 +1,9 @@
 package com.yorren.todolist;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -28,12 +30,12 @@ public class OnboardingActivity extends AppCompatActivity {
     //memasukan teks dan drawable yg akan digunakan untuk on boarding screen
     private Button btn_got_it;
     private String[] title_array = {
-            "To Do List", "Mencacat Kegiatan",
-            "Managemen Waktu", "Apa lagi ya"
+            "To Do List", "Menjadi lebih terorganisir",
+            "Mengingat setiap kegiatan", "Mudah digunakan"
     };
     private String[] description_array = {
-            "To Do List ni bang papalepapale papale papale paleeeeeee", "Aplikasi ini membantu anda mencatat rencana anda",
-            "Aplikasi ini membantu anda memanagemen waktu lebih baik", "Wes bingung aku arep nulis opo mas"
+            "To Do List membagi dan mengurutkan pekerjaan.", "Aplikasi ini membantu anda mengingat rencana anda",
+            "Aplikasi ini membantu anda memanagemen waktu lebih baik", "Mengurangi Stress"
     };
     private int[] about_images_array = {
             R.drawable.ic_group_8, R.drawable.ic_baseline_event_note_24,
@@ -53,6 +55,8 @@ public class OnboardingActivity extends AppCompatActivity {
 
         //menghilangkan status bar
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        checkFirstOpen();
     }
 
     private void initComponent() {
@@ -71,6 +75,7 @@ public class OnboardingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(OnboardingActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -79,6 +84,7 @@ public class OnboardingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(OnboardingActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
@@ -163,5 +169,18 @@ public class OnboardingActivity extends AppCompatActivity {
             View view = (View) object;
             container.removeView(view);
         }
+    }
+
+    private void checkFirstOpen(){
+        boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getBoolean("isFirstRun", true);
+
+        if (!isFirstRun){
+            Intent i = new Intent(OnboardingActivity.this, MainActivity.class);
+            startActivity(i);
+            finish();
+        }
+
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit().putBoolean("isFirstRun", false).apply();
     }
 }

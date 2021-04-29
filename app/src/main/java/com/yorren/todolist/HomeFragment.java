@@ -1,6 +1,5 @@
 package com.yorren.todolist;
 
-import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,12 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
+    //KURANG LEBIH SAMA SEPERTI YANG ADA DI HISTORY FRAGMENT
     List<ToDo> list = new ArrayList<ToDo>();
     TaskAdapter taskAdapter;
     DatabaseHelper myDb;
@@ -65,7 +63,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 if (edtSearch.length() != 0){
-                    List<ToDo> todoSearch = myDb.searchChecked(edtSearch.getText().toString().trim());
+                    List<ToDo> todoSearch = myDb.searchUnchecked(edtSearch.getText().toString().trim());
                     if (todoSearch != null) {
                         rvList.setAdapter(new TodoAdapter(getActivity(), todoSearch));
                     }

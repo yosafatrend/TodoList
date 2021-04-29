@@ -4,8 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import android.app.FragmentTransaction;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -38,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.person:
-                        fragment = new AddFragment();
+                        fragment = new HistoryFragment();
                         break;
                 }
                 return getFragmentPage(fragment);

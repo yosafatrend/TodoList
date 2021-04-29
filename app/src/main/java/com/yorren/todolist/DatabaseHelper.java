@@ -27,23 +27,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-
-        SQLiteDatabase db = this.getWritableDatabase();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        //membuat tabel baru bernama todo_table
         db.execSQL("create table todo_table(id integer primary key autoincrement," +
                 "nama text," +
                 "status integer);");
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_2, "Pergi Mancing");
-        contentValues.put(COL_3, 0);
-
-        db.insert(TABLE_NAME, null, contentValues);
     }
 
+    //untuk mengubah struktur database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
@@ -51,6 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    //fungsi untuk mengambil semua data di tabel todo_table
     public List<ToDo> getAllData() {
         List<ToDo> todos = new ArrayList<>();
         String selectQuery = "SELECT * FROM TODO_TABLE";
@@ -70,6 +65,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return todos;
     }
 
+
+    //fungsi untuk mengambil data yang mempunyai status 0
     public List<ToDo> getDataUnchecked() {
         List<ToDo> todos = new ArrayList<>();
         String selectQuery = "SELECT * FROM TODO_TABLE WHERE STATUS = '0'";
@@ -89,6 +86,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return todos;
     }
 
+    //fungsi untuk mencari data berdasarkan keyword
     public List<ToDo> search(String keyword) {
         List<ToDo> todos = new ArrayList<>();
         String selectQuery = "SELECT * FROM TODO_TABLE WHERE NAMA LIKE ?";
@@ -108,7 +106,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return todos;
     }
 
-    public List<ToDo> searchChecked(String keyword) {
+    //fungsi untuk mencari data dari todo_table yang memiliki status 0 berdasarkan keyword
+    public List<ToDo> searchUnchecked(String keyword) {
         List<ToDo> todos = new ArrayList<>();
         String selectQuery = "SELECT * FROM TODO_TABLE WHERE STATUS = '0' AND NAMA LIKE ?";
 
@@ -129,7 +128,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-    //metode untuk menambah data
+    //fungsi untuk menambahkan data
     public boolean insertData(String nama, String status) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -146,7 +145,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    //metode untuk mengubah data
+    //fungsi untuk memperbarui data
     public boolean updateData(String nama, String status, String id){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -164,6 +163,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    //fungsi untuk menghapus data
     public int deleteData(String id){
         SQLiteDatabase db = this.getWritableDatabase();
 

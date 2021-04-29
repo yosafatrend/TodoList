@@ -20,7 +20,7 @@
                     android:text="Tambah Kegiatan"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:textColor="#2196F3"/>
+                    android:textColor="#009688"/>
                 <EditText
                     android:id="@+id/edtNama"
                     android:layout_marginTop="5dp"
@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
                     android:layout_weight="1"
-                    android:background="#2196F3"
+                    android:background="#009688"
                     android:text="Ubah"
                     android:textColor="@color/white"/>
             </LinearLayout>

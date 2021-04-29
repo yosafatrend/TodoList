@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#f5f5f5"
-    tools:context=".AddFragment">
+    tools:context=".HistoryFragment">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -44,16 +44,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
-
-                    <Button
+                    <ImageView
                         android:id="@+id/btnSearch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:backgroundTint="@color/blue"
-                        android:drawableStart="@drawable/ic_baseline_search_24"
-                        android:drawableTint="@color/white"
-                        android:padding="10dp" />
+                        android:layout_weight="6"
+                        android:src="@drawable/ic_baseline_search_24"
+                        android:padding="10dp"
+                        android:background="#009688"
+                        android:layout_marginRight="7dp"
+                        app:tint="@color/white" />
 
                     <EditText
                         android:id="@+id/edtSearch"
@@ -79,6 +79,8 @@
             android:layout_alignParentBottom="true"
             android:layout_margin="20dp"
             android:background="#2196F3"
+            app:backgroundTint="#009688"
+            app:tint="#fff"
             android:src="@drawable/ic_baseline_add_24"/>
     </RelativeLayout>
 </FrameLayout>
